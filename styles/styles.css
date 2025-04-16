@@ -1,11 +1,581 @@
-/* ===== YOUR CSS GOES HERE ===== */
-/* ===== START BY IMPORTING YOUR FONTS ===== */ 
-/* ===== NEXT WRITE GLOBAL STYLES, THEN USE MEDIA QUERIES FOR LAYOUT/STYLE ADJUSTMENTS ===== */
-/* ===== STARTER CSS BELOW FOR body AND p IS JUST AN EXAMPLE... YOU MAY DELETE IT ===== */
+/*====Type Import====*/
+
+@import url("https://use.typekit.net/hpl3vdl.css");
+
+
+
+/*==== Box Sizing ====*/
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+
+
+/*==== CSS Reset ====*/
+
+:root {
+    font-size: 20px;
+    font-family: "basic-sans", sans-serif;
+    --color-red: #D33B37;
+    --color-tan: #FFDDB5;
+    --color-black: #000000;
+    --color-white: #FFFFFF;
+}
+
+
+
+/*==== Margin Reset ====*/
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+
+
+/*==== Type Sizing ====*/
+/* =================== */
 
 body {
-    background: magenta;
+    font-size: 1rem;
+    color: var(--color-black);
 }
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: 2rem;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: 2rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: 0.75rem;
+}
+
 p {
-    font-size: 2em;
+    font-size: 1rem;
+    color: var(--color-black);
+    margin-bottom: 0.5rem;
 }
+
+
+
+/*==== Link-Buttons ====*/
+/* ==================== */
+
+.link-button {
+    display: inline-block;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    font-size: 1rem;
+    font-weight: 300;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: box-shadow 0.25s ease-in-out;
+}
+
+.link-button:hover {
+    box-shadow: 0 0 5px var(--color-black);
+    transition: box-shadow 0.25s ease-in-out;
+}
+
+.adjacent-link-buttons {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    max-width: 72rem;
+    padding: 0 0.5rem;
+    margin: 2rem 0;
+}
+
+@media screen and (min-width: 850px) {
+    .adjacent-link-buttons {
+        flex-flow: row wrap;
+        padding: 0 2rem;
+    }
+}
+
+/*==== navbar ====*/
+/* ============== */
+
+.nav-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3.5rem auto;
+    grid-template-areas: "a b" "c c";   
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    gap: 0;
+    background-color: var(--color-white);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    padding: 0rem 2rem;
+    min-height: 3.5rem;
+}
+
+.nav-logo {
+    width: 3.5rem;
+    height: auto;
+    grid-area: a;
+}
+
+/* Hamburger menu */
+.menu-icon {
+    grid-area: b;
+    padding: 0;
+    background: none;
+    border: none;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.menu-icon .line {
+    transition:
+        y 0.25s ease-in 0.25s,
+        rotate 0.25s ease-in,
+        opacity 0s 0.25s;
+    ;
+    transform-origin: center;
+}
+
+/* Hamburger Transitions */
+.menu-icon[aria-expanded="true"] .line {
+    transition:
+        y 0.25s ease-in,
+        rotate 0.25s ease-in 0.25s,
+        opacity 0s 0.25s;
+    ;
+}
+
+.menu-icon[aria-expanded="true"] :is(.top, .bottom) {
+    y: 45;
+}
+
+.menu-icon[aria-expanded="true"] .top {
+    rotate: 45deg;
+}
+
+.menu-icon[aria-expanded="true"] .middle {
+    opacity: 0;
+}
+
+.menu-icon[aria-expanded="true"] .bottom {
+    rotate: -45deg;
+}
+
+/* Nav menu: hidden by default on mobile */
+.navbar {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: none;
+    max-height: 0;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    padding: 0;
+    margin: 0;
+    grid-area: c;
+}
+
+/* Show when JS toggles class */
+.navbar.expanded {
+    max-height: 855px;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    padding: 2rem 0 1rem 0;
+}
+/* navigation links */
+.navbar a {
+    display: block;
+    padding: 0.5rem 0rem;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--color-black);
+    text-decoration: none;
+}
+
+.navbar a:hover {
+text-decoration: underline;
+}
+
+/* Navigation Media Queries */
+@media screen and (min-width: 1059px) {
+    .nav-container {
+        display: grid;
+        grid-template-columns: 1fr 10fr;
+        grid-template-areas: "a b c";
+        height: 3.5rem;
+    }
+
+    .menu-icon {
+        display: none;
+    }
+
+    .navbar {
+        flex-flow: row wrap;
+        justify-content: right;
+        align-items: center;
+        gap: 3rem;
+        list-style: none;
+        max-height: unset;
+        padding: 0;
+    }
+
+    .navbar.expanded {
+        flex-flow: row wrap;
+        justify-content: right;
+        align-items: center;
+        gap: 3rem;
+        list-style: none;
+        max-height: unset;
+        padding: 0;
+    }
+
+    .navbar a {
+        text-align: right;
+    }
+}
+
+
+
+/*==== Header ====*/
+/* ============== */
+
+header.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url("../images/home_header.webp");
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+}
+
+header.cider {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    background-image: url("../images/header_bg.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+header img {
+    max-width: 20rem;
+    height: auto;
+}
+
+header h1 {
+    margin-block: 0.5rem;
+}
+
+
+
+/*==== Section Padding ====*/
+/* ======================= */
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem 0 3rem 0;
+}
+
+section:nth-of-type(odd) {
+    background-color: var(--color-tan);
+}
+
+
+
+/*==== Text-Container ====*/
+/* ====================== */
+
+/* Center the text and add padding */
+.text-container {
+    text-align: center;
+    max-width: 40rem;
+    padding: 0 2rem;
+}
+
+
+/*==== Cider-Cards ====*/
+/* =================== */
+
+
+
+/* Add translate to hover for cards!!!! */
+
+
+
+/* Style the buttons that are used to open and close the accordion panel */
+.card-text {
+    border-width: 0.15rem 0;
+    border-style: solid;
+    border-color: var(--color-black);
+}
+
+.accordion {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--color-white);
+    padding: 0.5rem 0;
+    border: none;
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    max-height: 0rem;
+    overflow: hidden;
+    padding-top: 0rem;
+    transition: max-height 0.5s, padding 0.5s;
+}
+  
+.panel.open {
+    max-height: 6rem;
+    padding-top: 0.5rem;
+    transition: max-height 0.75s ease-in, padding 0.5s;
+}
+
+.accordion:after {
+    content: '+';
+    font-family: inherit;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1rem;
+    color: var(--color-black);
+    float: right;
+}
+
+.active:after {
+    content: "-";
+}
+
+.cider-card-grid {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    gap: 2rem;
+    width: min(95%, 40rem);
+    margin: 1rem 0 2rem 0;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-black) transparent;
+}
+
+
+.cider-card {
+    background-color: var(--color-white);
+    flex-shrink: 0;
+    padding: 2rem;
+    margin: 1rem 11rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    border-radius: 0.25rem;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+}
+
+@media screen and (min-width: 1250px) {
+    .cider-card-grid {
+        width: clamp(60rem, 95%, 71rem);
+        padding: 1rem 0 1rem 0;
+        scroll-padding: 0 2rem;
+    }
+
+    .cider-card {
+        margin: 0;
+        scroll-snap-align: start;
+    }
+
+    .cider-card:first-child {
+        margin-left: 0.5rem;
+    }
+
+    .cider-card:last-child {
+        margin-right: 0.5rem;
+    }
+}
+.cider-card img {
+    width: clamp(12.5rem, 20vw, 16rem);
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.cider-card p {
+    width: clamp(12.5rem, 20vw, 16rem);
+    font-weight: 300;
+}
+
+
+
+/*==== Var-Cards ====*/
+/* ================== */
+
+
+.var-card-grid {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    gap: 2rem;
+    width: min(95%, 40rem);
+    margin: 1rem 0 2rem 0;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-black) transparent;
+}
+
+
+.var-card {
+    background-color: var(--color-white);
+    padding: 2rem;
+    margin: 1rem 11rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    border-radius: 0.25rem;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+}
+
+@media screen and (min-width: 1300px) {
+    .var-card-grid {
+        justify-content: center;
+        padding: 1rem 0 1rem 0;
+        width: clamp(60rem, 95%, 71rem);
+    }
+
+    .var-card {
+        margin: 0;
+    }
+}
+.var-card img {
+    width: clamp(14rem, 20vw, 16rem);
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.var-card p {
+    width: clamp(14rem, 20vw, 16rem);
+}
+
+
+
+/*==== Visit Us ====*/
+/* ================ */
+
+.visit {
+    background-image: url("../images/Pub.webp");
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+}
+
+
+/*==== Footer ====*/
+/* ============== */
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: var(--color-red);
+    padding: 5rem 2rem 3rem 2rem;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    width: min(75rem, 95%);
+    color: var(--color-white);
+}
+
+footer .footer-info {
+    display: grid;
+    grid-template-areas: "a" "b" "c" "d";
+    justify-content: space-around;
+    align-items: baseline;
+    gap: 3rem;
+}
+
+@media screen and (min-width: 600px) {
+    footer .footer-info {
+        grid-template-areas: "a b" "c d";
+
+    }
+}
+
+@media screen and (min-width: 900px) {
+    footer .footer-info {
+        grid-template-areas: "a b c d";
+
+    }
+}
+
+footer .footer-info > li:nth-child(1) {
+    grid-area: a;
+} 
+
+footer .footer-info > li:nth-child(2) {
+    grid-area: b;
+}
+
+footer .footer-info > li:nth-child(3) {
+    grid-area: c;
+}
+
+footer .footer-info > li:nth-child(4) {
+    grid-area: d;
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--color-black);
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
