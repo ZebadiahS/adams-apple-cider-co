@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adams Apple Cider co.</title>
+  <link rel="stylesheet" href="styles/newstyle.css" />
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-container">
+        <img class="nav-logo" src="../images/Logo_Small.webp" alt="Adams Apple Cider Co. Logo" />
+        
+        <!-- Menu Toggle Button -->
+        <button class="menu-icon" aria-controls="primary-navigation" aria-expanded="false">
+            <svg class="hamburger" viewBox="0 0 100 100" width="50" height="50">
+            <rect class="line top" 
+                    width="80" height="10"
+                    x="10" y="20" rx="5">
+            </rect>
+            <rect class="line middle" 
+                    width="80" height="10"
+                    x="10" y="45" rx="5">
+            </rect>
+            <rect class="line bottom"  
+                    width="80" height="10"
+                    x="10" y="70" rx="5">
+            </rect>
+            </svg>
+        </button>
+        
+        <!-- Collapsible Nav Menu -->
+        <ul class="navbar" class="expanded">
+            <li><a href="../HomePage.html">Home</a></li>
+            <li><a href="../Ciders.html">Ciders</a></li>
+            <li><a href="../cider-finder.html">Cider Finder</a></li>
+            <li><a href="#visit">Visit</a></li>
+            <li><a href="#visit">Events</a></li>
+            <li><a href="#contact">About</a></li>
+        </ul>
+        </div>
+    </nav>
+
+
+
+    <header class="cider">
+        <h1>Explore our Cider Varieties</h1>
+    </header>
+
+    <main id="cider-finder">
+
+        <section>
+
+            <div class="text-container">
+                <h2>Find exactly what you are looking for!</h2>
+                <p>
+                    We have a wide variety of ciders, from sweet to dry, and everything in between. 
+                    Use our Cider Finder to see if we have the flavors you are looking for. 
+                    Start by selecting the flavor profile you prefer.
+                </p>                    
+            </div>
+
+            <div class="adjacent-link-buttons">
+                <select name="flavor-profile" id="flavor-profile">
+                    <option value="default">Flavor Profile</option>
+                    <option value="traditional">Traditional</option>
+                    <option value="fruit">Fruit Ciders</option>
+                    <option value="tea-infused">Tea Infused</option>
+                    <option value="spiced">Spiced Ciders</option>
+                    <option value="wood-aged">Wood Aged</option>
+                    <option value="dessert">Dessert Ciders</option>
+                </select>
+
+                <select name="carbonation" id="carbonation">
+                    <option value="default">Carbonation Level</option>
+                    <option value="sparkling">Sparkling</option>
+                    <option value="still">Still</option>
+                </select>
+
+                <select name="sweetness" id="sweetness">
+                    <option value="default">Sweetness Level</option>
+                    <option value="semi-sweet">Semi-Sweet</option>
+                    <option value="semi-dry">Semi-Dry</option>
+                    <option value="dry">Dry</option>
+                </select>
+
+                <button id="search">Search</button>
+                <button id="reset">Reset Search</button>
+
+            </div>
+      
+        </section>
+        
+    </main> 
+
+    <footer class="contact">
+
+        <ul class="footer-info">
+    
+            <li>
+                <h3>Location</h3>
+                <ul>
+                    <li>123 Cider Lane</li>
+                    <li>Cityville, ST 12345</li>
+                </ul>
+            </li>
+    
+            <li>
+                <h3>Contact</h3>
+                <ul>
+                    <li>Office: (123) 456-7890</li>
+                    <li>Pub: (123) 456-7890</li>
+                    <li>adams.apple@email.com</li>
+                </ul>
+            </li>
+    
+            <li>
+                <h3><a href="#About">About</a></h3>
+            </li>
+    
+            <li>
+                <h3><a href="#Privacy">Privacy & Terms</a></h3>
+            </li>
+    
+          </ul>
+    
+      </footer>
+      <script src="scripts/apple.js" type="module"></script>
+
+</body>
