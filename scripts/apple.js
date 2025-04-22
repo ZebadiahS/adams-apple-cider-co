@@ -110,7 +110,7 @@ function createCards() {
 
   if (ciderFinder.contains(container)) {
     ciderFinder.removeChild(container);
-  }
+  };
 
   const selectedFlavor = flavorProfile.value;
   const selectedCarbonation = carbonationLevel.value;
@@ -119,6 +119,9 @@ function createCards() {
   // Rebuild the container and grid
   ciderFinder.appendChild(container);
   container.appendChild(ciderGrid);
+
+  // card counter
+  let cardsCreated = 0;
 
   // Filter and render matching ciders
   ciderData.categories.forEach(category => {
@@ -130,26 +133,34 @@ function createCards() {
       const matchesCarbonation = selectedCarbonation === "default" || cider.carbonation === selectedCarbonation;
       const matchesSweetness = selectedSweetness === "default" || cider.sweetness === selectedSweetness;
 
-      if (!matchesCarbonation || !matchesSweetness) {
-        const noResultsMessage = noResults();
-        ciderGrid.appendChild(noResultsMessage);
-      };
+      if (!matchesCarbonation || !matchesSweetness) return;
 
       const ciderCard = createCiderCard(cider);
       ciderGrid.appendChild(ciderCard);
+      cardsCreated++;
     });
   });
-}
+
+  if (cardsCreated === 0) {
+      noResults();
+  };
+};
+
+
 
 // function to display no results message
 function noResults() {
+
+  container.innerHTML = "";
+  
   const sorryMessage = document.createElement("h2");
   sorryMessage.textContent = "Sorry!";
   const noResultsMessage = document.createElement("p");
   noResultsMessage.textContent = "No results found. Please try different filters.";
+  
   container.appendChild(sorryMessage);
   container.appendChild(noResultsMessage);
-}
+};
 
 // Helper to create a single cider card
 function createCiderCard(cider) {
@@ -189,7 +200,7 @@ function createCiderCard(cider) {
   ciderCard.appendChild(cardText);
 
   return ciderCard;
-}
+};
 
 // Utility to simplify element creation
 function createElement(tag, attributes = {}, textContent = "") {
@@ -197,4 +208,4 @@ function createElement(tag, attributes = {}, textContent = "") {
   Object.entries(attributes).forEach(([key, value]) => el.setAttribute(key, value));
   if (textContent) el.textContent = textContent;
   return el;
-}
+};
