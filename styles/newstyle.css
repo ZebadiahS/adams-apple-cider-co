@@ -384,6 +384,7 @@ p {
 
 select {
     background-color: var(--color-white);
+    font-weight: 300;
     border: none;
     padding: 0.45rem;
     color: var(--color-red);
@@ -395,6 +396,7 @@ select {
 button:not(.menu-icon, .accordion) {
     background-color: var(--color-red);
     color: var(--color-white);
+    font-weight: 300;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
