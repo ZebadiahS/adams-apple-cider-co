@@ -278,7 +278,7 @@ header.home {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url("../images/home_header.webp");
+    background-image: url("./images/home_header.webp");
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -290,7 +290,7 @@ header.cider {
     justify-content: center;
     align-items: center;
     height: 50vh;
-    background-image: url("../images/header_bg.webp");
+    background-image: url("./images/header_bg.webp");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -507,7 +507,7 @@ section:nth-of-type(odd) {
 /* ================ */
 
 .visit {
-    background-image: url("../images/Pub.webp");
+    background-image: url("./images/Pub.webp");
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;

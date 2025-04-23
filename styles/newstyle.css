@@ -561,12 +561,12 @@ header.home, header.cider {
 
 header.home {
     height: 100vh;
-    background-image: url("../images/home_header.webp");
+    background-image: url("./images/home_header.webp");
 }
 
 header.cider {
     height: 60vh;
-    background-image: url("../images/header_bg.webp");
+    background-image: url("./images/header_bg.webp");
 }
 
 header img {
@@ -597,7 +597,7 @@ section:nth-of-type(odd) {
 }
 
 .visit {
-  background-image: url("../images/Pub.webp");
+  background-image: url("./images/Pub.webp");
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
