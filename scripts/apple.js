@@ -8,8 +8,8 @@ const menuBtn = document.querySelector(".menu-icon");
 const navbar = document.querySelector(".navbar");
 
 // cider cards
-var acc = document.getElementsByClassName("accordion");
-var i;
+const acc = document.getElementsByClassName("accordion");
+let i;
 
 // getting search and reset buttons for cider finder
 const searchBtn = document.querySelector(".search");
@@ -22,7 +22,7 @@ const resetBtn = document.querySelector(".reset");
 menuBtn.addEventListener("click", navOpenClose);
 
 // toggle for accordion 
-for (let i = 0; i < acc.length; i++) {
+for (i = 0; i < acc.length; i++) {
   acc[i].addEventListener("click", toggleAccordion);
 };
 
@@ -39,9 +39,9 @@ const flavorProfile = document.getElementById("flavor-profile");
 const carbonationLevel = document.getElementById("carbonation");
 const sweetnessLevel = document.getElementById("sweetness");
 const search = document.getElementById("search");
-const reset = document.getElementById("reset");
+// const reset = document.getElementById("reset");
 search.addEventListener("click", createCards);
-reset.addEventListener("click", removeSection);
+// reset.addEventListener("click", removeSection);
 
 
 
@@ -75,7 +75,7 @@ function collapseNavbar() {
 function toggleAccordion() {
   this.classList.toggle("active");
 
-  var panel = this.nextElementSibling;
+  const panel = this.nextElementSibling;
   panel.classList.toggle("open");
 
   if (panel.classList.contains("open")) {
@@ -86,21 +86,21 @@ function toggleAccordion() {
 };
 
 
-function removeSection() {
-  // Clear previous cards
-  ciderGrid.innerHTML = "";
-  container.innerHTML = "";
-  // remove section and cider card grid
-  if (ciderFinder.contains(container)) {
-    ciderFinder.removeChild(container);
-  }
+// function removeSection() {
+//   // Clear previous cards
+//   ciderGrid.innerHTML = "";
+//   container.innerHTML = "";
+//   // remove section and cider card grid
+//   if (ciderFinder.contains(container)) {
+//     ciderFinder.removeChild(container);
+//   }
 
-  // Reset filters
-  flavorProfile.value = "default";
-  carbonationLevel.value = "default";
-  sweetnessLevel.value = "default";
+//   // Reset filters
+//   flavorProfile.value = "default";
+//   carbonationLevel.value = "default";
+//   sweetnessLevel.value = "default";
 
-};
+// };
 
 // function to create cider cards based on selected filters
 function createCards() {
