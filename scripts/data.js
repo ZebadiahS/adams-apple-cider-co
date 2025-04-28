@@ -1,6 +1,8 @@
 
 // data.js
 // This file contains the data for the cider finder cards.
+// This database and all information was written and designed by me was me but Deepseek was used to assist in auto filling the information/database.
+// Using a javascript file as a database was an idea given by Copilot.
 
 export const ciderData = {
     categories: [

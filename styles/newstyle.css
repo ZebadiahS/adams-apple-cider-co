@@ -333,6 +333,8 @@ template {
 
 
 
+/* MY CSS FOR THIS PROJECT */
+
 
 
 /* Document & Sections */
@@ -470,6 +472,8 @@ button:hover:not(.menu-icon, .accordion) {
     margin-left: auto;
     cursor: pointer;
 }
+
+/* created based on a tutorial by Kevin Powell on YouTube */
 
 .menu-icon .line {
     transition: y 0.25s ease-in 0.25s, rotate 0.25s ease-in, opacity 0s 0.25s;

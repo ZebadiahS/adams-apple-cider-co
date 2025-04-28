@@ -1,5 +1,3 @@
-
-
 // calling cider cards from data.js
 import { ciderData } from "./data.js";
 
@@ -39,15 +37,72 @@ const flavorProfile = document.getElementById("flavor-profile");
 const carbonationLevel = document.getElementById("carbonation");
 const sweetnessLevel = document.getElementById("sweetness");
 const search = document.getElementById("search");
-// const reset = document.getElementById("reset");
+
+
+// Add event listeners to update flavor profile options dynamically
+flavorProfile.addEventListener("change", updateAllSelectOptions)
+carbonationLevel.addEventListener("change", updateAllSelectOptions);
+sweetnessLevel.addEventListener("change", updateAllSelectOptions);
 search.addEventListener("click", createCards);
-// reset.addEventListener("click", removeSection);
 
 
+// Writing of filters was assisted by copilot
+function updateAllSelectOptions() {
+  const selectedFlavor = flavorProfile.value;
+  const selectedCarbonation = carbonationLevel.value;
+  const selectedSweetness = sweetnessLevel.value;
 
+  // Reset all options to enabled
+  resetSelectOptions(flavorProfile);
+  resetSelectOptions(carbonationLevel);
+  resetSelectOptions(sweetnessLevel);
+
+  // Filter valid options for each select
+  const validFlavors = new Set();
+  const validCarbonation = new Set();
+  const validSweetness = new Set();
+
+  ciderData.categories.forEach(category => {
+    const matchesFlavor = selectedFlavor === "default" || category.category === selectedFlavor;
+
+    category.items.forEach(cider => {
+      const matchesCarbonation = selectedCarbonation === "default" || cider.carbonation === selectedCarbonation;
+      const matchesSweetness = selectedSweetness === "default" || cider.sweetness === selectedSweetness;
+
+      // Add valid options for other selects
+      if (matchesFlavor && matchesCarbonation && matchesSweetness) {
+        validFlavors.add(category.category);
+        validCarbonation.add(cider.carbonation);
+        validSweetness.add(cider.sweetness);
+      }
+    });
+  });
+
+  // Always disable invalid options for each select
+  disableInvalidOptions(flavorProfile, validFlavors);
+  disableInvalidOptions(carbonationLevel, validCarbonation);
+  disableInvalidOptions(sweetnessLevel, validSweetness);
+}
+
+// Helper to reset all options in a <select> to enabled
+function resetSelectOptions(selectElement) {
+  Array.from(selectElement.options).forEach(option => {
+    option.disabled = false;
+  });
+}
+
+// Helper to disable invalid options in a <select>
+function disableInvalidOptions(selectElement, validOptions) {
+  Array.from(selectElement.options).forEach(option => {
+    if (option.value !== "default" && !validOptions.has(option.value)) {
+      option.disabled = true;
+    }
+  });
+}
 
 // function for opening the navbar
 // and changing the aria-expanded attribute 
+// assisted by Copilot
 function navOpenClose() {
   const isOpened = menuBtn.getAttribute("aria-expanded");
   if (isOpened === "false") {
@@ -61,6 +116,7 @@ function navOpenClose() {
 
 
 // function for collapsing the navbar when the screen is resized
+// Created with assistance from Copilot.
 function collapseNavbar() {
   let screenWidth = window.innerWidth;
   if (screenWidth <= 1060) {
@@ -71,7 +127,8 @@ function collapseNavbar() {
 
 
 // function for toggling the accordion for cider cards
-// and changing the aria-hidden attribute
+// and changing the aria-hidden attribute/
+// assisted by Copilot
 function toggleAccordion() {
   this.classList.toggle("active");
 
@@ -86,23 +143,9 @@ function toggleAccordion() {
 };
 
 
-// function removeSection() {
-//   // Clear previous cards
-//   ciderGrid.innerHTML = "";
-//   container.innerHTML = "";
-//   // remove section and cider card grid
-//   if (ciderFinder.contains(container)) {
-//     ciderFinder.removeChild(container);
-//   }
-
-//   // Reset filters
-//   flavorProfile.value = "default";
-//   carbonationLevel.value = "default";
-//   sweetnessLevel.value = "default";
-
-// };
-
 // function to create cider cards based on selected filters
+// Code initially written by me with occasional input from Copilot.
+// The code was cleaned up and reformatted with the assistance of Deepseek.
 function createCards() {
   // Clear previous content
   ciderGrid.innerHTML = "";
