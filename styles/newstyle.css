@@ -442,6 +442,11 @@ button:hover:not(.menu-icon, .accordion) {
     margin: 2rem 0;
 }
 
+em {
+    font-weight: 700;
+    font-style: normal;
+}
+
 /* Navbar */
 .nav-container {
     display: grid;
@@ -638,7 +643,7 @@ section:nth-of-type(odd) {
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    margin-top: 1rem;
+    margin: 2rem;
 }
 
 .finder-grid >:nth-child(1) {

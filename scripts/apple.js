@@ -26,6 +26,7 @@ window.addEventListener("resize", collapseNavbar);
 
 // getting all elements needed for the cider finder
 const ciderFinder = document.getElementById("cider-finder");
+const ciderSearch = document.getElementById("finder-section");
 const container = document.createElement("section");
 container.setAttribute("class", "finder-container");
 const ciderGrid = document.createElement("div");
@@ -34,8 +35,11 @@ const flavorProfile = document.getElementById("flavor-profile");
 const carbonationLevel = document.getElementById("carbonation");
 const sweetnessLevel = document.getElementById("sweetness");
 const search = document.getElementById("search");
-const reset = document.getElementById("reset")
-reset.addEventListener("click", resetSelects)
+const reset = document.getElementById("reset");
+reset.addEventListener("click", resetSelects);
+// creating a results below message
+const resultsMsgContainer = createElement("div", {class: "text-container"}, "");
+const resultsMsg = createElement("p", {}, "Find your results below!");
 
 
 // adding event listeners to update flavor profile options dynamically
@@ -153,10 +157,12 @@ function resetSelects() {
 
   // clear all content from the container
   container.innerHTML = "";
+  resultsMsgContainer.innerHTML = "";
 
   // remove the container from the DOM if it exists
   if (ciderFinder.contains(container)) {
     ciderFinder.removeChild(container);
+    ciderSearch.removeChild(resultsMsgContainer);
   }
 }
 
@@ -165,11 +171,12 @@ function resetSelects() {
 // The code was cleaned up and reformatted with the assistance of Deepseek.
 function createCards() {
   // Clear previous content
-  ciderGrid.innerHTML = "";
   container.innerHTML = "";
+  resultsMsgContainer.innerHTML = "";
 
   if (ciderFinder.contains(container)) {
     ciderFinder.removeChild(container);
+    ciderSearch.removeChild(resultsMsgContainer);
   };
 
   const selectedFlavor = flavorProfile.value;
@@ -177,6 +184,8 @@ function createCards() {
   const selectedSweetness = sweetnessLevel.value;
 
   // rebuild the container and grid
+  ciderSearch.appendChild(resultsMsgContainer);
+  resultsMsgContainer.appendChild(resultsMsg);
   ciderFinder.appendChild(container);
   container.appendChild(ciderGrid);
 
