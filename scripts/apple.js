@@ -1,20 +1,17 @@
 // calling cider cards from data.js
 import { ciderData } from "./data.js";
 
-// navigation bar
+// getting navigation bar items
 const menuBtn = document.querySelector(".menu-icon");
 const navbar = document.querySelector(".navbar");
 
-// cider cards
+// getting cider card accordions
 const acc = document.getElementsByClassName("accordion");
 let i;
 
 // getting search and reset buttons for cider finder
 const searchBtn = document.querySelector(".search");
 const resetBtn = document.querySelector(".reset");
-
-
-
 
 // nav button event listener
 menuBtn.addEventListener("click", navOpenClose);
@@ -27,7 +24,7 @@ for (i = 0; i < acc.length; i++) {
 // hide navigation bar when the screen is resized
 window.addEventListener("resize", collapseNavbar);
 
-
+// getting all elements needed for the cider finder
 const ciderFinder = document.getElementById("cider-finder");
 const container = document.createElement("section");
 container.setAttribute("class", "finder-container");
@@ -37,27 +34,28 @@ const flavorProfile = document.getElementById("flavor-profile");
 const carbonationLevel = document.getElementById("carbonation");
 const sweetnessLevel = document.getElementById("sweetness");
 const search = document.getElementById("search");
+const reset = document.getElementById("reset")
+reset.addEventListener("click", resetSelects)
 
 
-// Add event listeners to update flavor profile options dynamically
+// adding event listeners to update flavor profile options dynamically
 flavorProfile.addEventListener("change", updateAllSelectOptions)
 carbonationLevel.addEventListener("change", updateAllSelectOptions);
 sweetnessLevel.addEventListener("change", updateAllSelectOptions);
 search.addEventListener("click", createCards);
 
-
-// Writing of filters was assisted by copilot
+// writing of filters was assisted by copilot
 function updateAllSelectOptions() {
   const selectedFlavor = flavorProfile.value;
   const selectedCarbonation = carbonationLevel.value;
   const selectedSweetness = sweetnessLevel.value;
 
-  // Reset all options to enabled
+  // reset all options to enabled for cider finder selects
   resetSelectOptions(flavorProfile);
   resetSelectOptions(carbonationLevel);
   resetSelectOptions(sweetnessLevel);
 
-  // Filter valid options for each select
+  // filter valid options for each select
   const validFlavors = new Set();
   const validCarbonation = new Set();
   const validSweetness = new Set();
@@ -69,7 +67,7 @@ function updateAllSelectOptions() {
       const matchesCarbonation = selectedCarbonation === "default" || cider.carbonation === selectedCarbonation;
       const matchesSweetness = selectedSweetness === "default" || cider.sweetness === selectedSweetness;
 
-      // Add valid options for other selects
+      // adding valid options for other selects
       if (matchesFlavor && matchesCarbonation && matchesSweetness) {
         validFlavors.add(category.category);
         validCarbonation.add(cider.carbonation);
@@ -78,20 +76,20 @@ function updateAllSelectOptions() {
     });
   });
 
-  // Always disable invalid options for each select
+  // always disable invalid options for each select
   disableInvalidOptions(flavorProfile, validFlavors);
   disableInvalidOptions(carbonationLevel, validCarbonation);
   disableInvalidOptions(sweetnessLevel, validSweetness);
 }
 
-// Helper to reset all options in a <select> to enabled
+// function for reseting all options in a select to enabled
 function resetSelectOptions(selectElement) {
   Array.from(selectElement.options).forEach(option => {
     option.disabled = false;
   });
 }
 
-// Helper to disable invalid options in a <select>
+// function to disable invalid options in a select
 function disableInvalidOptions(selectElement, validOptions) {
   Array.from(selectElement.options).forEach(option => {
     if (option.value !== "default" && !validOptions.has(option.value)) {
@@ -142,6 +140,25 @@ function toggleAccordion() {
   }
 };
 
+// function to reset all selects to default
+function resetSelects() {
+  // reset all selects to their default values
+  flavorProfile.value = "default";
+  sweetnessLevel.value = "default";
+  carbonationLevel.value = "default";
+
+  resetSelectOptions(flavorProfile);
+  resetSelectOptions(carbonationLevel);
+  resetSelectOptions(sweetnessLevel);
+
+  // clear all content from the container
+  container.innerHTML = "";
+
+  // remove the container from the DOM if it exists
+  if (ciderFinder.contains(container)) {
+    ciderFinder.removeChild(container);
+  }
+}
 
 // function to create cider cards based on selected filters
 // Code initially written by me with occasional input from Copilot.
@@ -159,14 +176,14 @@ function createCards() {
   const selectedCarbonation = carbonationLevel.value;
   const selectedSweetness = sweetnessLevel.value;
 
-  // Rebuild the container and grid
+  // rebuild the container and grid
   ciderFinder.appendChild(container);
   container.appendChild(ciderGrid);
 
   // card counter
   let cardsCreated = 0;
 
-  // Filter and render matching ciders
+  // filter and render matching ciders
   ciderData.categories.forEach(category => {
     const matchesFlavor = selectedFlavor === "default" || category.category === selectedFlavor;
 
@@ -205,16 +222,18 @@ function noResults() {
   container.appendChild(noResultsMessage);
 };
 
-// Helper to create a single cider card
+// function to create a single cider card
 function createCiderCard(cider) {
   const ciderCard = document.createElement("div");
   ciderCard.className = "cider-card";
 
+  // adding image to card creation
   const ciderImage = createElement("img", {
     src: cider.image,
     alt: cider.name
   });
 
+  // creating card elements
   const ciderName = createElement("h3", {}, cider.name);
   const ciderAbv = createElement("p", {}, cider.abv);
 
@@ -233,6 +252,7 @@ function createCiderCard(cider) {
     panel.setAttribute("aria-hidden", panel.classList.contains("open") ? "false" : "true");
   });
 
+  // appending card elements
   panel.appendChild(ciderDescription);
   cardText.appendChild(accordionBtn);
   cardText.appendChild(panel);
@@ -245,7 +265,7 @@ function createCiderCard(cider) {
   return ciderCard;
 };
 
-// Utility to simplify element creation
+// function for element creation
 function createElement(tag, attributes = {}, textContent = "") {
   const el = document.createElement(tag);
   Object.entries(attributes).forEach(([key, value]) => el.setAttribute(key, value));
