@@ -67,7 +67,7 @@
 
             <!-- button & select structure still in progress -->
             <div class="finder-grid">
-                <select name="flavor-profile" id="flavor-profile">
+                <select name="flavor-profile" id="flavor-profile" aria-label="Flavor Profile">
                     <option value="default">Flavor Profile</option>
                     <option value="traditional">Traditional</option>
                     <option value="fruit">Fruit Ciders</option>
@@ -76,24 +76,22 @@
                     <option value="wood-aged">Wood Aged</option>
                     <option value="dessert">Dessert Ciders</option>
                 </select>
-            
-
-            
-                <select name="carbonation" id="carbonation">
+                       
+                <select name="carbonation" id="carbonation" aria-label="Carbonation Level">
                     <option value="default">Carbonation Level</option>
                     <option value="sparkling">Sparkling</option>
                     <option value="still">Still</option>
                 </select>
 
-                <select name="sweetness" id="sweetness">
+                <select name="sweetness" id="sweetness" aria-label="Sweetness Level">
                     <option value="default">Sweetness Level</option>
                     <option value="semi-sweet">Semi-Sweet</option>
                     <option value="semi-dry">Semi-Dry</option>
                     <option value="dry">Dry</option>
                 </select>
 
-                <button id="search">Search</button>
-                <button id="reset">Reset</button>
+                <button id="search" name="search">Search</button>
+                <button id="reset" name="reset search">Reset</button>
 
         </div>
       
