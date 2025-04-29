@@ -607,30 +607,62 @@ section:nth-of-type(odd) {
   background-size: cover;
 }
 
+.text-container:not(.visit .text-container){
+    text-align: left;
+}
+
+@media (min-width:800px) {
+    .text-container:not(.visit .text-container) {
+        text-align: center;
+    }
+}
+
 
 /* cider finder buttons */
 
 .finder-grid {
     display: grid;
-    grid-template-columns: repeat(1, auto);
-    grid-template-rows: repeat(4, auto);
+    grid-template-rows: repeat( 5, auto);
+    grid-template-areas: 's1' 's2' 's3' 'b1' 'b2';
     justify-content: center;
     align-items: center;
     gap: 1rem;
     margin-top: 1rem;
 }
 
+.finder-grid >:nth-child(1) {
+    grid-area: s1;
+}
+
+.finder-grid >:nth-child(2) {
+    grid-area: s2;
+}
+
+.finder-grid >:nth-child(3) {
+    grid-area: s3;
+}
+
+.finder-grid >:nth-child(4) {
+    grid-area: b1;
+}
+
+.finder-grid >:nth-child(5) {
+    grid-area: b2; 
+}
+
 @media (min-width: 490px) {
     .finder-grid {
-        grid-template-columns: repeat(2, auto);
-        grid-template-rows: repeat(2, auto);
+        grid-template-columns: repeat( 2, auto);
+        grid-template-rows: repeat( 3, auto);
+        grid-template-areas: 's1 b1' 's2 b2' 's3 .';
     }
 }
 
-@media (min-width: 782px)  {
+@media (min-width: 850px)  {
     .finder-grid {
-        grid-template-columns: repeat(4, auto);
-        grid-template-rows: auto;  
+        grid-template-columns: repeat(5, auto);
+        grid-template-rows: auto;
+        grid-template-areas: 's1 s2 s3 b1 b2';
     }
 }
 
@@ -683,17 +715,28 @@ section:nth-of-type(odd) {
     gap: 2rem;
     width: clamp(16rem, 30vw, 18rem);
     margin: 1rem 0 2rem;
+    position: relative;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-black) transparent;
 }
+
+::-webkit-scrollbar {
+    width: 0.25rem;
+    background-color: transparent;
+    border-radius: 0.25rem;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    width: 0.25rem;
+    background: var(--color-black);
+    border-radius: 0.25rem;
+  }
 
 .cider-card, .var-card {
     background-color: var(--color-white);
     flex-shrink: 0;
     padding: 2rem;
-    margin: 1rem 2rem;
+    margin: 1rem 1rem;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
     transition: translate 0.25s ease-in-out, box-shadow 0.25s ease-in-out;    
     border-radius: 0.25rem;
