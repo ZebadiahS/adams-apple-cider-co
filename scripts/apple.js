@@ -156,6 +156,7 @@ function resetSelects() {
   resetSelectOptions(sweetnessLevel);
 
   // clear all content from the container
+  ciderGrid.innerHTML = "";
   container.innerHTML = "";
   resultsMsgContainer.innerHTML = "";
 
@@ -171,6 +172,7 @@ function resetSelects() {
 // The code was cleaned up and reformatted with the assistance of Deepseek.
 function createCards() {
   // Clear previous content
+  ciderGrid.innerHTML = "";
   container.innerHTML = "";
   resultsMsgContainer.innerHTML = "";
 
